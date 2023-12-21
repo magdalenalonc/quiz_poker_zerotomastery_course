@@ -1,4 +1,4 @@
-package com.example.quiz_poker_zerotomastery_course
+package com.magdalenalonc.quiz_poker_zerotomastery_course
 
 import io.flutter.embedding.android.FlutterActivity
 

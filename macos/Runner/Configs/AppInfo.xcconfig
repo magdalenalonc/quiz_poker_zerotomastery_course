@@ -8,7 +8,7 @@
 PRODUCT_NAME = quiz_poker_zerotomastery_course
 
 // The application's bundle identifier
-PRODUCT_BUNDLE_IDENTIFIER = com.example.quizPokerZerotomasteryCourse
+PRODUCT_BUNDLE_IDENTIFIER = com.magdalenalonc.quizPokerZerotomasteryCourse
 
 // The copyright displayed in application information
-PRODUCT_COPYRIGHT = Copyright © 2023 com.example. All rights reserved.
+PRODUCT_COPYRIGHT = Copyright © 2023 com.magdalenalonc. All rights reserved.

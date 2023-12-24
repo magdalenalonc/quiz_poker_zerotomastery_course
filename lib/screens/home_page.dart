@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../data/questions_list.dart';
-import '../models/question.dart';
 import '../widgets/question_item.dart';
 
 class HomePage extends StatelessWidget {
@@ -16,12 +15,15 @@ class HomePage extends StatelessWidget {
       body: ListView.builder(
         itemCount: questions.length,
         itemBuilder: (BuildContext context, int index) {
-          for (Question question in questions) {
-            return QuestionItem(question: question);
-          }
-          return null;
+          return QuestionItem(question: questions[index]);
         },
       ),
+      /* 2nd approach:
+        Column(
+          children: [
+            for (Question question in questions) QuestionItem(question: question),
+          ],
+        ),*/
       floatingActionButton: FloatingActionButton(
         onPressed: () => _showSnackBar(context),
         tooltip: "Press the button",

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../models/question.dart';
+import 'custom_category.dart';
 
 class QuestionItem extends StatelessWidget {
   const QuestionItem({super.key, required this.question});
@@ -43,23 +44,8 @@ class QuestionItem extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(
-            decoration: BoxDecoration(
-              color: Colors.amber,
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.all(6.0),
-              child: Text(
-                question.category.name.toUpperCase(),
-                style: TextStyle(
-                  color: Theme.of(context).colorScheme.onBackground,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-          ),
-          const SizedBox.square(dimension: 12.0),
+          CustomCategory(category: question.category),
+          const SizedBox.square(dimension: 8.0),
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

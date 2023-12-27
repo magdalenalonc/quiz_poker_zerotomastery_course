@@ -19,11 +19,14 @@ class HomePage extends StatelessWidget {
         },
       ),
       /* 2nd approach:
-        Column(
+      body: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(),
+        child: Column(
           children: [
             for (Question question in questions) QuestionItem(question: question),
           ],
-        ),*/
+        ),
+      )*/
       floatingActionButton: FloatingActionButton(
         onPressed: () => _showSnackBar(context),
         tooltip: "Press the button",

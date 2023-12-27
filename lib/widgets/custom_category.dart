@@ -13,11 +13,13 @@ class CustomCategory extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool isLargeScreen = MediaQuery.of(context).size.width >= 600;
+
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
         CircleAvatar(
-          radius: 22.0,
+          radius: isLargeScreen ? 42.0 : 22.0,
           backgroundImage: AssetImage(
             _getImagePath(category.name),
           ),

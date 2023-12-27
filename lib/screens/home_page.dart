@@ -12,13 +12,28 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         title: const Text("Quiz Poker"),
       ),
-      body: ListView.builder(
-        itemCount: questions.length,
-        itemBuilder: (BuildContext context, int index) {
-          return QuestionItem(question: questions[index]);
-        },
-      ),
-      /* 2nd approach:
+      body: LayoutBuilder(
+        builder: (context, constraints) {
+          if (constraints.maxWidth > constraints.maxHeight) {
+            return ListView.builder(
+              physics: const BouncingScrollPhysics(),
+              scrollDirection: Axis.horizontal,
+              itemCount: questions.length,
+              itemBuilder: (BuildContext context, int index) {
+                return QuestionItem(question: questions[index]);
+              },
+            );
+          } else {
+            return ListView.builder(
+              physics: const BouncingScrollPhysics(),
+              scrollDirection: Axis.vertical,
+              itemCount: questions.length,
+              itemBuilder: (BuildContext context, int index) {
+                return QuestionItem(question: questions[index]);
+              },
+            );
+          }
+          /* 2nd approach:
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
         child: Column(
@@ -27,6 +42,8 @@ class HomePage extends StatelessWidget {
           ],
         ),
       )*/
+        },
+      ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => _showSnackBar(context),
         tooltip: "Press the button",

@@ -1,10 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:quiz_poker_zerotomastery_course/models/question.dart';
 
 import '../data/questions_list.dart';
 import '../widgets/question_item.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  void _addQuestion() {
+    setState(() {
+      questions.add(
+        Question(
+          category: Category.other,
+          questionText: 'New Question Text',
+        ),
+      );
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,22 +62,10 @@ class HomePage extends StatelessWidget {
         },
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => _showSnackBar(context),
-        tooltip: "Press the button",
-        child: const Icon(Icons.message),
-      ),
-    );
-  }
-
-  void _showSnackBar(BuildContext context) {
-    final scaffold = ScaffoldMessenger.of(context);
-    scaffold.showSnackBar(
-      SnackBar(
-        content: const Text('Hello there!'),
-        action: SnackBarAction(
-          label: "Hide",
-          onPressed: scaffold.hideCurrentSnackBar,
-        ),
+        onPressed: _addQuestion,
+        splashColor: Theme.of(context).colorScheme.secondary,
+        tooltip: "Add question",
+        child: const Icon(Icons.add_box_rounded),
       ),
     );
   }

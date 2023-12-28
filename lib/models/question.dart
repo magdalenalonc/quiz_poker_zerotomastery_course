@@ -1,4 +1,4 @@
-enum Category { sport, music, movie, animals }
+enum Category { sport, music, movie, animals, other }
 
 class Question {
   Question({required this.category, required this.questionText});

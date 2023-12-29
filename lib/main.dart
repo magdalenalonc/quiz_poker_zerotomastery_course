@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'screens/home_page.dart';
+import 'theme.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,17 +14,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: "Quiz Poker",
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: const Color.fromARGB(255, 12, 63, 145),
-        ),
-        appBarTheme: const AppBarTheme(
-          backgroundColor: Color.fromARGB(255, 12, 63, 145),
-        ),
-      ),
+      theme: AppTheme.theme,
       home: const HomePage(),
     );
   }
 }
-
-

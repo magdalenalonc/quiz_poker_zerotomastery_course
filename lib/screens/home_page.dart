@@ -50,15 +50,15 @@ class _HomePageState extends State<HomePage> {
               },
             );
           }
-          /* 2nd approach:
-      body: SingleChildScrollView(
-        physics: const BouncingScrollPhysics(),
-        child: Column(
-          children: [
-            for (Question question in questions) QuestionItem(question: question),
-          ],
-        ),
-      )*/
+          /* Other approach:
+            body: SingleChildScrollView(
+              physics: const BouncingScrollPhysics(),
+              child: Column(
+                children: [
+                  for (Question question in questions) QuestionItem(question: question),
+                ],
+              ),
+            )*/
         },
       ),
       floatingActionButton: FloatingActionButton(

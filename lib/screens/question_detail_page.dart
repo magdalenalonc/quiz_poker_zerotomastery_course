@@ -12,35 +12,79 @@ class QuestionDetailPage extends StatefulWidget {
 }
 
 class _QuestionDetailPageState extends State<QuestionDetailPage> {
+  int actionCount = 0;
+
   @override
   Widget build(BuildContext context) {
-    int actionCount = 0;
-
     return Scaffold(
       appBar: AppBar(
         title: const Text("Question Details"),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              'Category: ${widget.question.category}',
-              style: const TextStyle(fontWeight: FontWeight.bold),
-            ),
-            const SizedBox.square(dimension: 12.0),
-            Text('Question: ${widget.question.questionText}'),
-            const SizedBox.square(dimension: 18.0),
-            ElevatedButton(
-              onPressed: () {
-                setState(() {
-                  actionCount++;
-                });
-                _showHint(actionCount);
-              },
-              child: Text('See hint/solution ($actionCount)'),
-            ),
-          ],
+      body: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                decoration: BoxDecoration(
+                  color: Colors.amber,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Text(
+                    'Category: ${widget.question.category.name.toUpperCase()}',
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 28.0,
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox.square(dimension: 18.0),
+              Container(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [
+                      Theme.of(context).colorScheme.primary,
+                      Theme.of(context).colorScheme.primary.withOpacity(0.6),
+                    ],
+                    begin: Alignment.topRight,
+                    end: Alignment.bottomLeft,
+                  ),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Text(
+                    'Question: ${widget.question.questionText}',
+                    style: const TextStyle(fontSize: 20.0),
+                  ),
+                ),
+              ),
+              const SizedBox.square(dimension: 50.0),
+              ElevatedButton(
+                style: ButtonStyle(
+                  backgroundColor:
+                      MaterialStateColor.resolveWith((states) => Colors.green),
+                ),
+                onPressed: () {
+                  setState(() {
+                    actionCount++;
+                  });
+                  _showHint(actionCount);
+                },
+                child: Text(
+                  'See hint/solution ($actionCount)',
+                  style: const TextStyle(
+                    fontSize: 20.0,
+                    color: Colors.black,
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -53,6 +97,8 @@ class _QuestionDetailPageState extends State<QuestionDetailPage> {
       _showSnackBar(widget.question.hint2);
     } else if (actionCount == 3) {
       _showSnackBar(widget.question.solution);
+    } else if (actionCount > 3) {
+      Navigator.of(context).pop();
     }
   }
 

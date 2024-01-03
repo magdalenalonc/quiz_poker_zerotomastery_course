@@ -3,28 +3,26 @@ import 'package:flutter/material.dart';
 import '../models/question.dart';
 
 class CustomCategory extends StatelessWidget {
-  const CustomCategory({super.key, required this.category});
+  const CustomCategory({super.key, required this.question});
 
-  final Category category;
+  final Question question;
 
-  String _getImagePath(String categoryName) {
+  String getImagePath(String categoryName) {
     return 'assets/images/$categoryName.jpg';
   }
 
   @override
   Widget build(BuildContext context) {
-    bool isLargeScreen = MediaQuery.of(context).size.width >= 600;
-
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
         CircleAvatar(
-          radius: isLargeScreen ? 42.0 : 22.0,
+          radius: 30.0,
           backgroundImage: AssetImage(
-            _getImagePath(category.name),
+            getImagePath(question.category.name),
           ),
         ),
-        const SizedBox.square(dimension: 16.0),
+        const SizedBox.square(dimension: 20.0),
         Container(
           decoration: BoxDecoration(
             color: Colors.amber,
@@ -33,7 +31,7 @@ class CustomCategory extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.all(6.0),
             child: Text(
-              category.name.toUpperCase(),
+              question.category.name.toUpperCase(),
               style: TextStyle(
                 color: Theme.of(context).colorScheme.onBackground,
                 fontWeight: FontWeight.bold,

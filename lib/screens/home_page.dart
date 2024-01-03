@@ -48,42 +48,25 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    bool isLandscapeMode =
+        MediaQuery.of(context).size.width >= MediaQuery.of(context).size.height;
+
     return Scaffold(
       appBar: AppBar(
         title: const Text("Quiz Poker"),
       ),
-      body: LayoutBuilder(
-        builder: (context, constraints) {
-          if (constraints.maxWidth > constraints.maxHeight) {
-            return ListView.builder(
-              physics: const BouncingScrollPhysics(),
-              scrollDirection: Axis.horizontal,
-              itemCount: questions.length,
-              itemBuilder: (BuildContext context, int index) {
-                return QuestionItem(
-                  question: questions[index],
-                  onTap: () => _goToQuestionDetail(
-                    questions[index],
-                  ),
-                );
-              },
-            );
-          } else {
-            return ListView.builder(
-              physics: const BouncingScrollPhysics(),
-              scrollDirection: Axis.vertical,
-              itemCount: questions.length,
-              itemBuilder: (BuildContext context, int index) {
-                return QuestionItem(
-                  question: questions[index],
-                  onTap: () => _goToQuestionDetail(
-                    questions[index],
-                  ),
-                );
-              },
-            );
-          }
-          /* Other approach:
+      body: ListView.builder(
+        physics: const BouncingScrollPhysics(),
+        scrollDirection: isLandscapeMode ? Axis.horizontal : Axis.vertical,
+        itemCount: questions.length,
+        itemBuilder: (BuildContext context, int index) {
+          return QuestionItem(
+            question: questions[index],
+            onTap: () => _goToQuestionDetail(questions[index]),
+          );
+        },
+      ),
+      /* Other approach:
             body: SingleChildScrollView(
               physics: const BouncingScrollPhysics(),
               child: Column(
@@ -92,8 +75,6 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
             )*/
-        },
-      ),
       floatingActionButton: FloatingActionButton(
         onPressed: _goToRandomQuestionDetail,
         splashColor: Theme.of(context).colorScheme.secondary,

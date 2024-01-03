@@ -14,8 +14,8 @@ class DisplayHorizontalScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 400,
-      margin: const EdgeInsets.all(14.0),
+      width: 350,
+      margin: const EdgeInsets.all(12.0),
       padding: const EdgeInsets.all(20.0),
       decoration: BoxDecoration(
         gradient: LinearGradient(
@@ -31,7 +31,7 @@ class DisplayHorizontalScreen extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          CustomCategory(category: question.category),
+          CustomCategory(question: question),
           const SizedBox.square(dimension: 16.0),
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,

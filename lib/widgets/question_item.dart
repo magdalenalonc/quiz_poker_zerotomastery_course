@@ -5,19 +5,30 @@ import 'display_horizontal.dart';
 import 'display_vertical.dart';
 
 class QuestionItem extends StatelessWidget {
-  const QuestionItem({super.key, required this.question});
+  const QuestionItem({
+    super.key,
+    required this.question,
+    required this.onTap,
+  });
 
   final Question question;
+  final Function() onTap;
 
   @override
   Widget build(BuildContext context) {
-    bool isLargeScreen = MediaQuery.of(context).size.width >= 600;
-
-    if (isLargeScreen) {
-      return DisplayHorizontalScreen(question: question);
-    } else {
-      return DisplayVerticalScreen(question: question);
-    }
+    return InkWell(
+      splashColor: Colors.amber,
+      onTap: onTap,
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          if (constraints.maxWidth < constraints.maxHeight) {
+            return DisplayVerticalScreen(question: question);
+          } else {
+            return DisplayHorizontalScreen(question: question);
+          }
+        },
+      ),
+    );
   }
 
   /*Other approach:

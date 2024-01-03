@@ -30,7 +30,7 @@ class DisplayVerticalScreen extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          CustomCategory(category: question.category),
+          CustomCategory(question: question),
           const SizedBox.square(dimension: 8.0),
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,

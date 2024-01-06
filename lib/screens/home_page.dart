@@ -1,5 +1,7 @@
+import 'dart:io' show Platform;
 import 'dart:math';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:quiz_poker_zerotomastery_course/screens/question_detail_page.dart';
 
@@ -15,6 +17,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  int _selectedIndex = 0;
+
   /*void _addQuestion() {
     setState(() {
       questions.add(
@@ -43,6 +47,48 @@ class _HomePageState extends State<HomePage> {
       Random random = Random();
       int randomIndex = random.nextInt(questions.length);
       _goToQuestionDetail(questions[randomIndex]);
+    }
+  }
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
+  Widget _buildBottomNavigationBar() {
+    if (kIsWeb) {
+      return NavigationBar(
+        indicatorColor: Theme.of(context).colorScheme.primary,
+        selectedIndex: _selectedIndex,
+        onDestinationSelected: _onItemTapped,
+        destinations: const [
+          NavigationDestination(
+            icon: Icon(Icons.list),
+            label: 'Questions List',
+          ),
+          NavigationDestination(
+            icon: Icon(Icons.add),
+            label: 'Add Question',
+          ),
+        ],
+      );
+    } else {
+      return BottomNavigationBar(
+        selectedItemColor: Theme.of(context).colorScheme.primary,
+        currentIndex: _selectedIndex,
+        onTap: _onItemTapped,
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.list),
+            label: 'Questions List',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.add),
+            label: 'Add Question',
+          ),
+        ],
+      );
     }
   }
 
@@ -75,6 +121,7 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
             )*/
+      bottomNavigationBar: _buildBottomNavigationBar(),
       floatingActionButton: FloatingActionButton(
         onPressed: _goToRandomQuestionDetail,
         splashColor: Theme.of(context).colorScheme.secondary,

@@ -14,6 +14,54 @@ class QuestionDetailPage extends StatefulWidget {
 class _QuestionDetailPageState extends State<QuestionDetailPage> {
   int actionCount = 0;
 
+  void _showHint(int actionCount) {
+    if (actionCount == 1) {
+      _opemAnimatedDialog(widget.question.hint1);
+    } else if (actionCount == 2) {
+      _opemAnimatedDialog(widget.question.hint2);
+    } else if (actionCount == 3) {
+      _opemAnimatedDialog(widget.question.solution);
+    } else if (actionCount > 3) {
+      Navigator.of(context).pop();
+    }
+  }
+
+  void _opemAnimatedDialog(String message) {
+    showGeneralDialog(
+      context: context,
+      transitionDuration: const Duration(milliseconds: 600),
+      pageBuilder: (context, animation1, animation2) {
+        return Container();
+      },
+      transitionBuilder: (context, a1, a2, widget) {
+        return ScaleTransition(
+          scale: Tween<double>(begin: 0.5, end: 1.0).animate(a1),
+          child: AlertDialog(
+            backgroundColor: Colors.white,
+            title: const Text(
+              "Catch a hint or solution!",
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+            content: Text(
+              message,
+              style: const TextStyle(fontSize: 18.0),
+            ),
+            shape: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(16.0),
+              borderSide: const BorderSide(width: 1.5),
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: const Text('Close'),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -86,26 +134,6 @@ class _QuestionDetailPageState extends State<QuestionDetailPage> {
             ],
           ),
         ),
-      ),
-    );
-  }
-
-  void _showHint(int actionCount) {
-    if (actionCount == 1) {
-      _showSnackBar(widget.question.hint1);
-    } else if (actionCount == 2) {
-      _showSnackBar(widget.question.hint2);
-    } else if (actionCount == 3) {
-      _showSnackBar(widget.question.solution);
-    } else if (actionCount > 3) {
-      Navigator.of(context).pop();
-    }
-  }
-
-  void _showSnackBar(String message) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(message),
       ),
     );
   }
